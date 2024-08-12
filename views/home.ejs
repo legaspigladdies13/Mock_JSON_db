@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+
+<head>
+    <link href="/css/styles.css"rel="stylesheet" />
+</head>
+
+
+<body>
+    <img src="/images/RDP Royals logo.jpg" />
+    <h3>Mock JSON Database CRUD Operations</h3>
+
+ 
+    <div id="formContainer">
+          <form id="addUserForm" method="POST" action="/users">
+              <h4>User (POST method) Form</h4>
+ 
+              <label for="username"><Username:</label>
+              <input type="text" id="username" name="userame" required />
+
+              <label for="username"><Username:</label>
+              <input type="text" id="username" name="first_name" required />
+
+              <label for="username"><Username:</label>
+              <input type="email" id="username" name="email" required />
+
+              <button type="submit">Add Useer</button>
+         
+         
+         
+            </form>
+            <form id="editUserForm" method="POST" action="/users/:id/update">
+                <h4>User (POST/PUT method) Form</h4>
+
+                <label for="id">User ID:</label>
+                <input type= "number" id="edit_id" name="id" required />
+  
+                <label for="new_username">New Username:</label>
+                <input type="text" id="new_username" name="new_userame" required />
+  
+                <label for="new_first_name">New First Namet:</label>
+                <input type="text" id="new_firts_name" name="first_name" required />
+  
+                <label for="new_email">Username:</label>
+                <input type="email" id="username" name="email" required />
+  
+                <button type="submit" onclick="updateUser()">Add User</button>
+           
+           
+           
+              </form>
+              <form id="deleteUserForm" method="POST" action ="user/:id/delete"
+                  
+                 <h4>Delete (Delete or POST Method)</h4>
+                 <input type="number" id="delete_id" placeholder="User ID" required />
+                 <button type="submit" onclick="deleteUser()">Delete User</button>
+             </form>
+
+              
+ 
+
+  </div>
+</body> 
+<script>
+    function updateUser(){
+        var editForm = document.getElamentById("editUserForm");
+        var id = documnet.getElementById("edit_id").value;
+
+        editForm.action = "/users/" + id + "/update";
+        editForm.submit();
+
+    }
+
+    function deleteUser(){
+        var editForm = document.getElamentById("deleteUserForm");
+        var id = documnet.getElementById("delete_id").value;
+
+        deleteForm.action = "/users/" + id + "/delete";
+        deleteForm.submit();
+    }
+</script>
+<html>
