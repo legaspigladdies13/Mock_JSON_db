@@ -33,26 +33,47 @@ async function createUser(req, res){
 
 //function for updating user
 async function updateUser(req, res){
-   try {
-        const data = readData();
-        const user = data.users.find(user => user.id  === parseInt(req.params.id));
+    try {
+        const data = await readData();
+        const user = data.users.find(user => user.id === parseInt(req.params.id));
 
         if(user){
-            user.username = req.body.username  || user.username;
-            user.first_name = req.body.first_name ||  user.first_name;
-            user.email = req.body.email || user.email;
+            user.username = req.body.new_username || user.username;
+            user.first_name = req.body.new_first_name || user.first_name;
+            user.email = req.body.new_email || user.email;
             await writeData(data);
+
+            res.redirect('/');
         } else {
             res.status(404).send("User not found");
         }
 
-   } catch (error) {
-      res.status(500).json("Internal Server Error");
-   }
+    } catch (error) {
+        res.status(500).json("Internal Server Error");
+    }
+}
 
+//function for deleting user
+async function deleteUser(req, res){
+    try {
+        const data = await readData();
+        const userIndex = data.users.findIndex(user => user.id === parseInt(req.params.id));
+
+        if(userIndex !== -1){
+            data.users.splice(userIndex,1);
+            await writeData(data);
+            res.redirect('/');  
+        } else {
+            res.status(404).send("User not found");
+        }
+
+    } catch (error) {
+        res.status(500).json("Internal Server Error");
+    }
 }
 
 module.exports = {
     createUser,
     updateUser,
+    deleteUser,
 }
